@@ -40,16 +40,16 @@ let VideoList = ({ videos }) => {
   }
 }
 
-let buildPage = () => {
-  if (this.state.data) {
+let SeriesPage = ({ data }) => {
+  if (data) {
     return (
       <ScrollView>
         <View>
-          <Text>{this.state.data.title}</Text>
-          { this.state.data.description ? <Text>{this.state.data.description}</Text> : null }
+          <Text>{data.title}</Text>
+          { data.description ? <Text>{data.description}</Text> : null }
         </View>
         <View>
-          {this.renderVideoList()}
+          <VideoList videos={data.videos} />
         </View>
       </ScrollView>
     )
