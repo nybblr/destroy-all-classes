@@ -6,20 +6,21 @@ import Loading from 'components/loading'
 import Video from 'components/video'
 import API from 'services/api'
 
-class SeriesPageContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { data: null }
-  }
+let withModel = (model, initial) => BaseComponent =>
+  class WithModel extends Component {
+    constructor(props) {
+      super(props)
+      this.state = { data: initial }
+    }
 
-  async componentWillMount() {
-    this.setState({ data: await model(this.props) })
-  }
+    async componentWillMount() {
+      this.setState({ data: await model(this.props) })
+    }
 
-  render() {
-    return <SeriesPage data={this.state.data} />
+    render() {
+      return <BaseComponent data={this.state.data} />
+    }
   }
-}
 
 let model = async ({ id }) => {
   let res = await API.getSeries(id)
