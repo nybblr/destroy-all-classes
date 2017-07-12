@@ -63,4 +63,7 @@ let SeriesPage = ({ data }) => {
   }
 }
 
-export default SeriesPageContainer
+let enhance =
+  withModel(model, null)
+
+export default enhance(SeriesPage)
