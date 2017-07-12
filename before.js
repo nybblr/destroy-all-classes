@@ -1,32 +1,22 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { ScrollView, Text, View } from 'react-native'
 import { compose, branch, renderComponent } from 'recompose'
 
 import Loading from 'components/loading'
 import Video from 'components/video'
 import API from 'services/api'
+import withModel from 'lib/with-model'
 
-let withModel = (model, initial) => BaseComponent =>
-  class WithModel extends Component {
-    constructor(props) {
-      super(props)
-      this.state = { data: initial }
-    }
-
-    async componentWillMount() {
-      this.setState({ data: await model(this.props) })
-    }
-
-    render() {
-      return <BaseComponent data={this.state.data} />
-    }
-  }
-
-let model = async ({ id }) => {
-  let res = await API.getSeries(id)
-  let json = await res.json()
-  return json.series
-}
+let SeriesPage = ({ data }) =>
+  <ScrollView>
+    <View>
+      <Text>{data.title}</Text>
+      { data.description ? <Text>{data.description}</Text> : null }
+    </View>
+    <View>
+      <VideoList videos={data.videos} />
+    </View>
+  </ScrollView>
 
 let VideoListBase = ({ videos }) =>
   <View>
@@ -45,16 +35,11 @@ let VideoList = branch(
   renderComponent(NoVideosFound)
 )(VideoListBase)
 
-let SeriesPage = ({ data }) =>
-  <ScrollView>
-    <View>
-      <Text>{data.title}</Text>
-      { data.description ? <Text>{data.description}</Text> : null }
-    </View>
-    <View>
-      <VideoList videos={data.videos} />
-    </View>
-  </ScrollView>
+let model = async ({ id }) => {
+  let res = await API.getSeries(id)
+  let json = await res.json()
+  return json.series
+}
 
 let enhance = compose(
   withModel(model, null),
