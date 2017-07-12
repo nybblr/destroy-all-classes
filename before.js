@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, View } from 'react-native'
-import { branch, renderComponent } from 'recompose'
+import { compose, branch, renderComponent } from 'recompose'
 
 import Loading from 'components/loading'
 import Video from 'components/video'
@@ -45,25 +45,23 @@ let VideoList = branch(
   renderComponent(NoVideosFound)
 )(VideoListBase)
 
-let SeriesPage = ({ data }) => {
-  if (data) {
-    return (
-      <ScrollView>
-        <View>
-          <Text>{data.title}</Text>
-          { data.description ? <Text>{data.description}</Text> : null }
-        </View>
-        <View>
-          <VideoList videos={data.videos} />
-        </View>
-      </ScrollView>
-    )
-  } else {
-    return <Loading />
-  }
-}
+let SeriesPage = ({ data }) =>
+  <ScrollView>
+    <View>
+      <Text>{data.title}</Text>
+      { data.description ? <Text>{data.description}</Text> : null }
+    </View>
+    <View>
+      <VideoList videos={data.videos} />
+    </View>
+  </ScrollView>
 
-let enhance =
-  withModel(model, null)
+let enhance = compose(
+  withModel(model, null),
+  branch(
+    ({ data }) => !data,
+    renderComponent(Loading)
+  )
+)
 
 export default enhance(SeriesPage)
