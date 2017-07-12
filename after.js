@@ -1,10 +1,6 @@
 import React from 'react'
-import {
-  ScrollView,
-  Text,
-  View
-} from 'react-native'
-import { pure, compose, branch, renderComponent } from 'recompose';
+import { ScrollView, Text, View } from 'react-native'
+import { pure, compose, branch, renderComponent } from 'recompose'
 
 import Loading from 'components/loading'
 import Video from 'components/video'

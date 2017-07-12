@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-import {
-  ScrollView,
-  Text,
-  View
-} from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 
 import Loading from 'components/loading'
 import Video from 'components/video'
@@ -35,7 +31,7 @@ class SeriesPage extends Component {
     if(this.state.data.videos.length > 0) {
       return this.state.data.videos.map(video => this.renderVideo(video))
     } else {
-      return(
+      return (
         <View>
           <Text>No videos found</Text>
         </View>
