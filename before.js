@@ -11,19 +11,19 @@ class SeriesPageContainer extends Component {
     this.state = { data: null }
   }
 
-  async fetchData(id) {
-    let res = await API.getSeries(id)
-    let json = await res.json()
-    this.setState({ data: json.series })
-  }
-
-  componentWillMount() {
-    this.fetchData(this.props.id)
+  async componentWillMount() {
+    this.setState({ data: await model(this.props) })
   }
 
   render() {
     return <SeriesPage data={this.state.data} />
   }
+}
+
+let model = async ({ id }) => {
+  let res = await API.getSeries(id)
+  let json = await res.json()
+  return json.series
 }
 
 let VideoList = ({ videos }) => {
