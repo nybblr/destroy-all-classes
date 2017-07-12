@@ -26,15 +26,11 @@ class SeriesPage extends Component {
   }
 }
 
-let renderVideo = video => {
-  return (
-    <Video key={video.id} data={video} />
-  )
-}
-
-let renderVideoList = () => {
+let VideoList = () => {
   if(this.state.data.videos.length > 0) {
-    return this.state.data.videos.map(video => this.renderVideo(video))
+    return this.state.data.videos.map(video =>
+      <Video key={video.id} data={video} />
+    )
   } else {
     return (
       <View>
