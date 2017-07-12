@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, View } from 'react-native'
+import { branch, renderComponent } from 'recompose'
 
 import Loading from 'components/loading'
 import Video from 'components/video'
@@ -38,13 +39,10 @@ let NoVideosFound = () =>
     <Text>No videos found</Text>
   </View>
 
-let VideoList = ({ videos }) => {
-  if(videos.length > 0) {
-    return <VideoListBase videos={videos} />
-  } else {
-    return <NoVideosFound />
-  }
-}
+let VideoList = branch(
+  ({ videos }) => videos.length === 0,
+  renderComponent(NoVideosFound)
+)(VideoListBase)
 
 let SeriesPage = ({ data }) => {
   if (data) {
