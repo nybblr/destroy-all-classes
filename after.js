@@ -18,7 +18,7 @@ let SeriesPage = ({ data }) =>
     </View>
   </ScrollView>
 
-let VideoList = ({ videos, navigator }) =>
+let VideoList = ({ videos }) =>
   <View>
     { videos.map(video =>
       <Video key={video.id} data={video} />
