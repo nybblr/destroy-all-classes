@@ -5,7 +5,7 @@ import Loading from 'components/loading'
 import Video from 'components/video'
 import API from 'services/api'
 
-class SeriesPage extends Component {
+class SeriesPageContainer extends Component {
   constructor(props) {
     super(props)
     this.state = { data: null }
@@ -22,7 +22,7 @@ class SeriesPage extends Component {
   }
 
   render() {
-    return this.buildPage()
+    return <SeriesPage data={this.state.data} />
   }
 }
 
@@ -58,4 +58,4 @@ let SeriesPage = ({ data }) => {
   }
 }
 
-export default SeriesPage
+export default SeriesPageContainer
