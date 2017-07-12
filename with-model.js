@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { compose, withState } from 'recompose';
+import React, { Component } from 'react'
+import { compose, withState } from 'recompose'
 
 let fetchData = model => BaseComponent =>
   class FetchData extends Component {
