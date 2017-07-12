@@ -26,17 +26,23 @@ let model = async ({ id }) => {
   return json.series
 }
 
+let VideoListBase = ({ videos }) =>
+  <View>
+    { videos.map(video =>
+      <Video key={video.id} data={video} />
+    ) }
+  </View>
+
+let NoVideosFound = () =>
+  <View>
+    <Text>No videos found</Text>
+  </View>
+
 let VideoList = ({ videos }) => {
   if(videos.length > 0) {
-    return videos.map(video =>
-      <Video key={video.id} data={video} />
-    )
+    return <VideoListBase videos={videos} />
   } else {
-    return (
-      <View>
-        <Text>No videos found</Text>
-      </View>
-    )
+    return <NoVideosFound />
   }
 }
 
